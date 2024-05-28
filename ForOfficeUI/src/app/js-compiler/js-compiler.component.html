@@ -1,0 +1,169 @@
+<!-- 
+  - client name
+  - file output path disabled at first can be enabled
+  - js label name
+  - sql server authetication (server, username, password)
+  - 
+ -->
+
+ <!-- <div class="max-w-md mx-auto mt-4">
+  <label class="inline-flex items-center mb-5 cursor-pointer">
+    <input type="checkbox" [(ngModel)]="showServerInput" class="sr-only peer">
+    <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:w-5 after:h-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+    <span class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">Edit Server Input</span>
+  </label>
+</div>
+
+
+<form [formGroup]="form" class="max-w-md mx-auto mt-4" (ngSubmit)="onSubmit()">
+  <div *ngFor="let control of form.controls | keyvalue">
+    <div class="mb-5" *ngIf="control.key !== 'server' && control.key !== 'user_name' && control.key !== 'pass' && control.key !== 'file_output_path'">
+      <label [for]="control.key" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{
+        controlNames[control.key] }}</label>
+      <input type="text" [formControlName]="control.key" [id]="control.key"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+      <p *ngIf="form.controls[control.key].invalid && (form.controls[control.key].dirty || form.controls[control.key].touched)"
+        class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">Oops!</span> {{
+        controlNames[control.key] }} is required</p>
+    </div>
+
+    <div class="mb-5" *ngIf="control.key == 'file_output_path'">
+      <label [for]="control.key" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{
+        controlNames[control.key] }}</label>
+      <input type="text" [formControlName]="control.key" [id]="control.key"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+      <p *ngIf="form.controls[control.key].invalid && (form.controls[control.key].dirty || form.controls[control.key].touched)"
+        class="text-xs text-red-600 dark:text-red-500"><span class="font-medium">Oops!</span> {{
+        controlNames[control.key] }} is required</p>
+    </div>
+
+    <div class="mb-5" *ngIf="showServerInput && (control.key === 'pass' || control.key === 'server' || control.key === 'user_name')">
+        <label [for]="control.key" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{
+          controlNames[control.key] }}</label>
+        <input type="{{ control.key !== 'pass' ? 'text' : 'password' }}" [formControlName]="control.key"
+          [id]="control.key"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+        <p *ngIf="form.controls[control.key].invalid && (form.controls[control.key].dirty || form.controls[control.key].touched)"
+          class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">Oops!</span> {{
+          controlNames[control.key] }} is required</p>
+    </div>
+  </div>
+
+  <button type="submit" [disabled]="!form.valid" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium 
+    rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 
+    dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+</form> -->
+
+<app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+<app-notification [notificationParam]="notificationParam"></app-notification>
+<div class="max-w-md mx-auto mt-4">
+  <label class="inline-flex items-center cursor-pointer">
+    <input type="checkbox" [(ngModel)]="showServerInput" class="sr-only peer">
+    <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:w-5 after:h-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+    <span class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">Edit Server Input</span>
+  </label>
+</div>
+
+
+<form [formGroup]="form" class="max-w-md mx-auto mt-4" (ngSubmit)="onSubmit()">
+  <!--  -->
+
+
+  <!-- <div class="mb-5">
+    <label for="client" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{controlNames['client']}}</label>
+    <input type="text" formControlName="client" id="client"
+      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+    <p *ngIf="form.controls['client'].invalid && (form.controls['client'].dirty || form.controls['client'].touched)"
+      class=" text-xs text-red-600 dark:text-red-500"><span class="font-medium">Oops!</span> {{
+      controlNames['client'] }} is required</p>
+  </div> -->
+
+  <div class="mb-5">
+    <label for="client" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ controlNames['client'] }}</label>
+    <select formControlName="client" id="client"
+      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+      <option value="">Select {{ controlNames['client'] }}</option>
+      <!-- Use *ngFor to loop through options object -->
+      <option *ngFor="let option of dropdownOptions" [value]="option.key">{{ option.value }}</option>
+    </select>
+    <p *ngIf="form.controls['client'].invalid && (form.controls['client'].dirty || form.controls['client'].touched)"
+      class="text-xs text-red-600 dark:text-red-500"><span class="font-medium">Oops!</span> {{ controlNames['client'] }} is required</p>
+  </div>
+
+  <div class="mb-5">
+    <label for="file_output_path" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{controlNames['file_output_path']}}</label>
+    <input type="text"  placeholder="C:\Data" formControlName="file_output_path" id="file_output_path"
+      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 
+      focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
+       dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" [readonly]="true">
+    <!-- <label class="inline-flex items-center mt-2 cursor-pointer" style="float:right">
+      <input type="checkbox" formControlName="enable_output" class="sr-only peer">
+      <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:w-5 after:h-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+      <span class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">Enable Output</span>
+    </label>   -->
+    <p *ngIf="form.controls['file_output_path'].invalid && (form.controls['file_output_path'].dirty || form.controls['file_output_path'].touched)"
+      class=" text-xs text-red-600 dark:text-red-500"><span class="font-medium">Oops!</span> {{
+      controlNames['file_output_path'] }} is required</p>
+  </div>
+
+  <!-- <div class="mb-5">
+    <label for="label_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{controlNames['label_name']}}</label>
+    <input type="text" formControlName="label_name" id="label_name"
+      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+    <p *ngIf="form.controls['label_name'].invalid && (form.controls['label_name'].dirty || form.controls['label_name'].touched)"
+      class=" text-xs text-red-600 dark:text-red-500"><span class="font-medium">Oops!</span> {{
+      controlNames['label_name'] }} is required</p>
+  </div> -->
+
+  <div class="mb-5">
+    <label for="label_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ controlNames['label_name'] }}</label>
+    <select formControlName="label_name" id="label_name"
+      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+      <option value="">Select {{ controlNames['label_name'] }}</option>
+      <option *ngFor="let option of labelOptions" [value]="option">{{ option }}</option>
+    </select>
+    <p *ngIf="form.controls['label_name'].invalid && (form.controls['label_name'].dirty || form.controls['label_name'].touched)"
+      class="text-xs text-red-600 dark:text-red-500"><span class="font-medium">Oops!</span> {{ controlNames['label_name'] }} is required</p>
+  </div>
+
+  <div *ngIf="showServerInput">
+    <div class="mb-5">
+      <label for="server" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{controlNames['server']}}</label>
+      <input type="text" formControlName="server" id="server"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+      <p *ngIf="form.controls['server'].invalid && (form.controls['server'].dirty || form.controls['server'].touched)"
+        class=" text-xs text-red-600 dark:text-red-500"><span class="font-medium">Oops!</span> {{
+        controlNames['server'] }} is required</p>
+    </div>
+
+    <div class="mb-5">
+      <label for="user_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{controlNames['user_name']}}</label>
+      <input type="text" formControlName="user_name" id="user_name"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+      <p *ngIf="form.controls['user_name'].invalid && (form.controls['user_name'].dirty || form.controls['user_name'].touched)"
+        class=" text-xs text-red-600 dark:text-red-500"><span class="font-medium">Oops!</span> {{
+        controlNames['user_name'] }} is required</p>
+    </div>
+
+    <div class="mb-5">
+      <label for="pass" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{controlNames['pass']}}</label>
+      <input type="password" formControlName="pass" id="pass"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 
+        focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 
+        dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+      
+      <p *ngIf="form.controls['pass'].invalid && (form.controls['pass'].dirty || form.controls['pass'].touched)"
+        class=" text-xs text-red-600 dark:text-red-500"><span class="font-medium">Oops!</span> {{
+        controlNames['pass'] }} is required</p>
+    </div>
+  </div>
+
+  <button type="submit" [disabled]="!form.valid" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium 
+    rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 
+    dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+  
+    <label for="message" class="mt-6 block mb-2 text-sm font-medium text-gray-900 dark:text-white">Compiled JS</label>
+    <textarea id="message" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your thoughts here..." readonly>{{processedJs}}</textarea>
+</form>
+
+
