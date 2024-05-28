@@ -18,3 +18,9 @@ APIs for retrieving supplying data to UI.
 ### Running Documentation
 a. dot net project
 
+
+# JsCompileImages
+![](./images/JsCompile1.png)
+![](./images/JsCompile2.png)
+![](./images/JsCompile3.png)
+![](./images/JsCompile4.png)
