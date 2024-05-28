@@ -1,3 +1,12 @@
-## Purpose of the projects 
+# ForOfficeUI
 
-* To create applications that help in miscellanous changes
+### Description
+
+UI build in angular 17. 
+Used standalone components.
+
+### Running Documentation
+a. npm install
+b. ng serve
+
+# 
